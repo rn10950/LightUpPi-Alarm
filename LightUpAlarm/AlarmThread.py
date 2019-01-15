@@ -199,6 +199,7 @@ class AlarmThread(threading.Thread):
                   (alarm_item.id_, alarm_item.label))
             if callback is not None:
                 callback()
+			subprocess.call(['aplay /alarm.wav'], shell=True)
         finally:
             # Unblock
             cls.__alert_running = False
