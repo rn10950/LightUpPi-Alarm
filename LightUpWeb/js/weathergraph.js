@@ -15,13 +15,17 @@
 /** Create a namespace for the application. */
 var WeatherGraph = WeatherGraph || {};
 
+/** OpenWeatherMap API Key: */
+WeatherGraph.apiKey = "b8d58ac19dfd428f036b8d4303f537aa";
+
 /** Add Skyicons instance to application. */
 WeatherGraph.skycons = null;
 
 /** Local globals to set weather city */
-WeatherGraph.OpenWeatherCityId = 2633691;
-WeatherGraph.CityLatitude = 52.5833;
-WeatherGraph.CityLongitude = 2.1333;
+WeatherGraph.OpenWeatherCityId = 5127302;
+WeatherGraph.CityLatitude = 41.3305;
+WeatherGraph.CityLongitude = -74.1867;
+
 
 /** Initialize the WeatherGraph on page load. */
 window.addEventListener("load", function load(event) {
@@ -50,7 +54,7 @@ WeatherGraph.addSkycons = function() {
 WeatherGraph.updateWeatherData = function() {
   var weatherJsonUrl = "http://api.openweathermap.org/data/2.5/forecast" +
                        "?id=" + WeatherGraph.OpenWeatherCityId +
-                       "&units=metric";
+                       "&units=imperial&APPID=" + WeatherGraph.apiKey;
 
   $.get(weatherJsonUrl, WeatherGraph.processWeather).error(function() {
     alert("Something went wrong fetching the weather data.");
