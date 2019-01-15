@@ -26,6 +26,22 @@ WeatherGraph.OpenWeatherCityId = 5127302;
 WeatherGraph.CityLatitude = 41.3305;
 WeatherGraph.CityLongitude = -74.1867;
 
+/** unit selection function **/
+function tempUnit(output) {
+	/** set unit [f/c] **/
+	var unit = "F";
+	if(output == 0) {
+		/** api key output */
+		if(unit == "F") {
+			return "imperial";
+		} else if (unit == "C") {
+			return "metric";
+		}
+	} else if (output == 1) {
+		return unit;
+	}
+}
+
 
 /** Initialize the WeatherGraph on page load. */
 window.addEventListener("load", function load(event) {
@@ -54,7 +70,7 @@ WeatherGraph.addSkycons = function() {
 WeatherGraph.updateWeatherData = function() {
   var weatherJsonUrl = "http://api.openweathermap.org/data/2.5/forecast" +
                        "?id=" + WeatherGraph.OpenWeatherCityId +
-                       "&units=imperial&APPID=" + WeatherGraph.apiKey;
+                       "&units=" + tempUnit(0) + "&APPID=" + WeatherGraph.apiKey;
 
   $.get(weatherJsonUrl, WeatherGraph.processWeather).error(function() {
     alert("Something went wrong fetching the weather data.");
@@ -88,7 +104,7 @@ WeatherGraph.processWeather = function(jsonReturned) {
         "weather"+i,
         WeatherGraph.weatherToIcon(dayData[nowIndex+i].weather[0].icon));
     var tempSpan = document.getElementById("temp"+i);
-    tempSpan.innerHTML = dayData[nowIndex+i].main.temp + " °C";
+    tempSpan.innerHTML = dayData[nowIndex+i].main.temp + " °" + tempUnit(1);
     //console.log(JSON.stringify(dayData[i], null, 2));
   }
 };
