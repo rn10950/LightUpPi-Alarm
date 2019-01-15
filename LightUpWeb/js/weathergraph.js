@@ -30,14 +30,15 @@ WeatherGraph.CityLongitude = -74.1867;
 function tempUnit(output) {
 	/** set unit [f/c] **/
 	var unit = "F";
-	if(output == 0) {
-		/** api key output */
-		if(unit == "F") {
+	if (output == 0) {
+		/** api request url output */
+		if (unit == "F") {
 			return "imperial";
 		} else if (unit == "C") {
 			return "metric";
 		}
 	} else if (output == 1) {
+		/** page display output */
 		return unit;
 	}
 }
